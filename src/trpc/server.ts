@@ -22,9 +22,11 @@ const createContext = cache(async () => {
 });
 
 const getQueryClient = cache(createQueryClient);
+
+// Create a caller function that createHydrationHelpers can use
 const caller = createCaller(createContext);
 
 export const { trpc: api, HydrateClient } = createHydrationHelpers<AppRouter>(
-  caller,
+  caller as any,
   getQueryClient
 );
